@@ -1,0 +1,16 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "target": "es5",
+    "allowUnreachableCode": false,
+    "noImplicitReturns": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "./node_modules/**/*",
+    "./dist/**/*",
+    "./tmp/*"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "github-marketplace",
+  "version": "1.0.0",
+  "main": "dist/scrape.js",
+  "author": "Encore Shao",
+  "license": "MIT",
+  "description": "Scrape github marketplace webpage",
+  "dependencies": {
+    "puppeteer": "^10.2.0",
+    "puppeteer-cluster": "^0.22.0",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no tests installed\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/scrape.js"
+  }
+}

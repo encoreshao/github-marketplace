@@ -1,0 +1,9 @@
+yarn-error.log
+
+*.js
+*.js.map
+
+/config/s3.yml
+/node_modules
+/log
+/tmp
