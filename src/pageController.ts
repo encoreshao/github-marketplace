@@ -12,4 +12,4 @@ async function scrapeAll(browserInstance: any){
   return data;
 }
 
-module.exports = (browserInstance: any) => { return scrapeAll(browserInstance) }
+module.exports = (browserInstance: any) => scrapeAll(browserInstance)
