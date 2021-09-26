@@ -1,3 +1,23 @@
+async function searchMarketplaceItems(page: any) {
+  const newApps = await page.$$eval('div.MarketplaceBody .d-md-flex.flex-wrap.mb-4 a', (trows: any)=>{
+    let rowList: any = []
+    trows.forEach((row: any) => {
+      rowList.push({
+        'logo': row.querySelector('img') && row.querySelector('img').src,
+        'name': row.querySelector('h3').innerText.trim(),
+        'permalink': row.href.replace('https://github.com/marketplace/', ''),
+        'url': row.href,
+        'powered_by': row.querySelector('p:first-of-type') && row.querySelector('p:first-of-type').innerText.trim().replace('By ', ''),
+        'short_desription': row.querySelector('p:last-of-type') && row.querySelector('p:last-of-type').innerText.trim(),
+        'installs': row.querySelector('span') && row.querySelector('span').innerText.trim().replace(' installs', '')
+      })
+    });
+    return rowList;
+  });
+
+  return newApps;
+}
+
 async function extractPageContent(page: any) {
   let data: any = {};
 
@@ -16,7 +36,7 @@ async function extractPageContent(page: any) {
   data['developer_url'] = await findItemURL(page, '.marketplace-listing-details-sidebar .py-3.lh-condensed a.css-truncate');
   data['developer_logourl'] = await findItemSrc(page, '.marketplace-listing-details-sidebar .py-3.lh-condensed a.css-truncate img');
   data['developer_links'] = await findAllItemsURLs(page, '.marketplace-listing-details-sidebar .py-3.lh-condensed li.mb-1 a');
-  data['links'] = await extractLinks(page);
+  // data['links'] = await extractLinks(page);
 
   return data;
 }
@@ -81,4 +101,4 @@ async function findItemProperty(page: any, element: string, property: string) {
   return value
 }
 
-module.exports = { extractPageContent };
+module.exports = { searchMarketplaceItems, extractPageContent };
