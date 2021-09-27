@@ -1,18 +1,18 @@
-const browserObject = require('./browser');
-const scraperController = require('./pageController');
+const browserObject = require('./utils/browser');
 const Entity = require('./models/entity');
+const pageScraper = require('./utils/pageScraper');
 
-// Start the browser and create a browser instance
-let browserInstance = browserObject.startBrowser();
 const scrape = async () => {
-  let data = await scraperController(browserInstance);
-  const key = process.argv[3]
+  // Start the browser and create a browser instance
+  let browser = await browserObject.startBrowser();
+  let data = await pageScraper.scraper(browser);
 
+  const key = process.argv[3]
   if (key == undefined) {
-    console.log(`data: ${JSON.stringify(data, null, 2)}`);
+    console.log(`// data: ${JSON.stringify(data, null, 2)}`);
   } else {
     const entity = new Entity(data);
-    console.log(`${key}: ${entity.name}`);
+    console.log(`// ${key}: ${entity.name}`);
   }
 };
 

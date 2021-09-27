@@ -12,7 +12,7 @@ async function startBrowser(){
       'ignoreHTTPSErrors': true
     });
   } catch (err: any) {
-    console.log(`Could not create a browser instance => : ${err.message}`);
+    console.log(`// Could not create a browser instance: ${err.message}`);
   }
   return browser;
 }

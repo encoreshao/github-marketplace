@@ -13,6 +13,7 @@
   "scripts": {
     "test": "echo \"Error: no tests installed\" && exit 1",
     "build": "tsc",
-    "start": "node dist/scrape.js"
+    "start": "node dist/scrape.js",
+    "discover": "node dist/discover.js"
   }
 }

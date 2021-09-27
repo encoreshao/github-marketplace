@@ -1,4 +1,4 @@
-const utilsParse = require('./utils/parse');
+const utilsParse = require('./parse');
 
 const scraperObject = {
   url: 'https://github.com/marketplace/' + process.argv[2],
@@ -11,7 +11,7 @@ const scraperObject = {
     console.log(`// Parse content...`);
     let data = await utilsParse.extractPageContent(page);
 
-    console.log(`// Closing browser`);
+    console.log(`// Closing browser.`);
     await browser.close();
 
     const timeSpent = ((new Date().getTime()) - startTime) / 1000;

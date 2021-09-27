@@ -1,5 +1,5 @@
 export {};
-const browserObject = require('./browser');
+const browserObject = require('./utils/browser');
 const utilsParse = require('./utils/parse');
 
 const discover = async () => {
