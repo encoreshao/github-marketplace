@@ -15,7 +15,7 @@
 
 - yarn build
 
-## Command to scrape all apps from list page
+## Command to scrape all apps from list page, and write the results into apps.csv
 
 - yarn discover apps
 

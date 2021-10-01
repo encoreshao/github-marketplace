@@ -8,7 +8,7 @@ async function searchMarketplaceItems(page: any) {
         'permalink': row.href.replace('https://github.com/marketplace/', ''),
         'url': row.href,
         'powered_by': row.querySelector('p:first-of-type') && row.querySelector('p:first-of-type').innerText.trim().replace('By ', ''),
-        'short_desription': row.querySelector('p:last-of-type') && row.querySelector('p:last-of-type').innerText.trim(),
+        'short_description': row.querySelector('p:last-of-type') && row.querySelector('p:last-of-type').innerText.trim(),
         'installs': row.querySelector('span') && row.querySelector('span').innerText.trim().replace(' installs', '')
       })
     });

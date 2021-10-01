@@ -1,6 +1,7 @@
 export {};
 const browserObject = require('./utils/browser');
 const utilsParse = require('./utils/parse');
+const csvWriter = require('./utils/csvWriter');
 
 const discover = async () => {
   const startTime = new Date().getTime();
@@ -37,12 +38,14 @@ const discover = async () => {
   const timeSpent = ((new Date().getTime()) - startTime) / 1000;
   console.log(`// Completed in  ${timeSpent} secs!`);
 
-  outputApps(apps);
+  console.log(`Total of ${apps.length} apps.`);
+  csvWriter.toCSV(apps);
+  // outputApps(apps);
 };
 
 const outputApps = (apps: any) => {
   if (apps.length) {
-    console.log(`apps: total of ${apps.length} \n${JSON.stringify(apps, null, 2)}`);
+    console.log(`apps: \n${JSON.stringify(apps, null, 2)}`);
   } else {
     console.log('No apps found!');
   }

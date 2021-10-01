@@ -1,9 +1,9 @@
 yarn-error.log
+apps.csv
 
 *.js
 *.js.map
 
-/config/s3.yml
 /node_modules
 /log
 /tmp

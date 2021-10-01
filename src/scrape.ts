@@ -9,10 +9,10 @@ const scrape = async () => {
 
   const key = process.argv[3]
   if (key == undefined) {
-    console.log(`// data: ${JSON.stringify(data, null, 2)}`);
+    console.log(`Data: ${JSON.stringify(data, null, 2)}`);
   } else {
     const entity = new Entity(data);
-    console.log(`// ${key}: ${entity.name}`);
+    console.log(`${key}: ${entity.name}`);
   }
 };
 
