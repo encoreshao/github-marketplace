@@ -30,49 +30,62 @@ async function searchMarketplaceItems(page: any) {
   return newApps;
 }
 
+/**
+ * Extracts content from a single github marketplace app page.
+ * @param {Page} page The page object.
+ * @returns {Promise<Object>} A data object with the following properties:
+ *   - name
+ *   - url
+ *   - logo
+ *   - verified
+ *   - description
+ *   - app_type
+ *   - supported_languages
+ *   - categories
+ *   - about
+ *   - installs
+ */
 async function extractPageContent(page: any) {
   let data: any = {};
 
-  data["name"] = await findItemText(page, ".f00-light.lh-condensed");
+  data["name"] = await findItemText(page, "h1.h3");
   data["url"] = await page.evaluate(() => document.location.href);
-  data["verified_domains"] = await findAllItemsText(
+  data["logo"] = await findItemSrc(page, "div[data-testid='logo'] img");
+  data["verified"] = await findBooleanItem(
     page,
-    "ul[aria-labelledby='verified-domains-header'] li strong"
+    "div[data-testid='verified-owner'] svg[aria-label='Manually verified']"
   );
-  data["logo"] = await findItemSrc(page, ".CircleBadge img");
-  data["verified"] = await findBooleanItem(page, "svg.octicon-verified");
-  data["description"] = await findItemText(page, "div.Details");
+  data["description"] = await findItemText(
+    page,
+    "div[data-testid='readme-content']"
+  );
   data["app_type"] = await findAllItemsText(
     page,
-    ".py-3.lh-condensed p.topic-tag"
+    "span[data-testid='type-label']"
   );
-  data["supported_languages"] = await scrapeLanguages(
+  data["supported_languages"] = await findItemText(
     page,
-    ".py-3.lh-condensed span button",
-    ".py-3.lh-condensed span:nth-child(2)"
+    "div[data-testid='languages'] > span"
   );
-  data["categories"] = await findAllItemsText(
-    page,
-    "ul[aria-labelledby='categories-heading'] li > a.topic-tag"
-  );
-  data["highlight_categories"] = await findAllItemsText(
-    page,
-    "ul[aria-labelledby='categories-heading'] li > a.topic-tag:not(.topic-tag-outline)"
-  );
-  data["customers"] = await scrapeCustomers(
-    page,
-    "ul[aria-labelledby='customers-header'] li a[data-hovercard-type='organization']"
-  );
-  data["developers"] = await scrapeDevelopers(
-    page,
-    "ul[aria-labelledby='developer-heading'] li a[data-hovercard-type='organization']"
-  );
-  data["developer_links"] = await findAllItemsURLs(
-    page,
-    "ul[aria-labelledby='developer-links-header'] li a"
-  );
-  // data['links'] = await extractLinks(page);
 
+  const categories = await findAllItemsText(
+    page,
+    "div[data-testid='tags'] div a.topic-tag"
+  );
+  data["categories"] = Array.from(new Set(categories));
+
+  data["about"] = await findItemText(
+    page,
+    "div[data-testid='about'] span:first-child"
+  );
+  data["installs"] = await findItemText(
+    page,
+    "div[data-testid='about'] span.text-bold"
+  );
+
+  await page.click("span[data-content='Transparency']"); // Example: Clicking a tab with text 'Transparency'
+
+  await page.waitForTimeout(1000); // Pause 1 秒
   return data;
 }
 

@@ -5,7 +5,7 @@ const scraperObject = {
   async scraper(browser: any) {
     const startTime = new Date().getTime();
     let page = await browser.newPage();
-    console.log(`// Navigating to ${this.url}...`);
+    console.log(`// Navigating to ${this.url} ...`);
     await page.goto(this.url, { waitUntil: "networkidle2", timeout: 3000000 });
 
     console.log(`// Parse content...`);

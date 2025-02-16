@@ -10,7 +10,7 @@ const discover = async () => {
 
   const category = identifier == undefined ? "" : identifier;
   const type = pageCategory == undefined ? "" : pageCategory;
-  let marketplaceUrl = `https://github.com/marketplace?category=${category}&query=&type=${type}&verification=`;
+  let marketplaceUrl = `https://github.com/marketplace?type=${type}&category=${category}`;
 
   let browser = await browserObject.startBrowser();
   let page = await browser.newPage();
